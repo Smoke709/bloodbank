@@ -4,6 +4,7 @@ if(isset($_POST['rregister'])){
 	$rname=$_POST['rname'];
 	$remail=$_POST['remail'];
 	$rpassword=$_POST['rpassword'];
+	$rpassword = md5($rpassword);
 	$rphone=$_POST['rphone'];
 	$rcity=$_POST['rcity'];
 	$rbg=$_POST['rbg'];

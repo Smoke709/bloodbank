@@ -10,6 +10,7 @@ if(isset($_POST['update'])){
     $bg = $_POST['bg'];
     $rcity = $_POST['rcity'];
     $rpassword = $_POST['rpassword'];
+    $rpassword =md5($rpassword);
     $update = "UPDATE receivers SET rname='$rname', remail='$remail', rpassword='$rpassword', rphone='$rphone', rbg='$bg',rcity='$rcity' WHERE id='$id'";
     if ($conn->query($update) === TRUE) {
         $msg = "Your profile is updated successfully.";
@@ -30,6 +31,7 @@ if(isset($_POST['update'])){
     $hphone = $_POST['hphone'];
     $hcity = $_POST['hcity'];
     $hpassword = $_POST['hpassword'];
+    $hpassword = md5($hpassword);
     $update = "UPDATE hospitals SET hname='$hname', hemail='$hemail', hpassword='$hpassword', hphone='$hphone', hcity='$hcity' WHERE id='$id'";
     if ($conn->query($update) === TRUE) {
         $msg= "Your profile is updated successfully.";

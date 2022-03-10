@@ -4,6 +4,7 @@ if(isset($_POST['hregister'])){
 	$hname=$_POST['hname'];
 	$hemail=$_POST['hemail'];
 	$hpassword=$_POST['hpassword'];
+	$hpassword = md5($hpassword);
 	$hphone=$_POST['hphone'];
 	$hcity=$_POST['hcity'];
 	$check_email = mysqli_query($conn, "SELECT hemail FROM hospitals where hemail = '$hemail' ");
