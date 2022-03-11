@@ -4,6 +4,7 @@ session_start();
     if(isset($_POST['hlogin'])){
     $hemail=$_POST['hemail'];
     $hpassword=$_POST['hpassword'];
+    $hpassword = md5($hpassword);
     $sql="select * from hospitals where hemail='$hemail' and hpassword='$hpassword'";
     $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
     $rows_fetched=mysqli_num_rows($result);
