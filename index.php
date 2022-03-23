@@ -13,7 +13,7 @@
     <?php require 'header.php'; ?>
 
     <div class="container cont">
-
+    
       <?php require 'message.php'; ?>
 
         <div class="row justify-content-center">
@@ -98,16 +98,17 @@
             </div>
 
         </div>
+        
     </div>
     
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-6 rounded mb-5">
 
             </div>
             <div class="col-lg-6 rounded mb-5">
                  </div>
-        </div>
+        </div> -->
 
         <div class="container" id="sus">
 				<div class="row">

@@ -4,7 +4,7 @@ session_start();
     if(isset($_POST['rlogin'])){
     $remail=$_POST['remail'];
     $rpassword=$_POST['rpassword'];
-    $hpassword = md5($hpassword);
+    $rpassword = md5($rpassword);
     $sql="select * from receivers where remail='$remail' and rpassword='$rpassword'";
     $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
     $rows_fetched=mysqli_num_rows($result);

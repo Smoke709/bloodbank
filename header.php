@@ -1,3 +1,12 @@
+<!-- <head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+        .design li a{
+            font-family: 'Ubuntu', sans-serif;
+        }
+    </style>
+</head> -->
+
 <nav id= "navv" class="navbar navbar-expand-sm navbar-light sticky-top" style="background-color: #e3f2fd;">
 	<div class="container">
 		<a class="navbar-brand" href="index.php"><img src="image/favicon.jpg" width="30" height="30" class="rounded-circle">Blood Bank</a>
@@ -9,7 +18,7 @@
 
         <?php if (isset($_SESSION['hid'])) { ?>
 
-		<ul class="navbar-nav ml-auto">
+		<ul class="navbar-nav ml-auto design">
 			<li class="nav-item">
 				<a class="nav-link" href="bloodinfo.php"  style="color: red; font-weight: bold;">Add blood info</a>
             </li>
@@ -29,7 +38,7 @@
 
         <?php } elseif (isset($_SESSION['rid'])) { ?>
 
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto design">
             <li class="nav-item">
                 <a class="nav-link" href="sentrequest.php"  style="color: red; font-weight: bold;">Sent Blood Request</a>
             </li>
@@ -46,16 +55,19 @@
 
         <?php }  else { ?>
 
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto design">
             <li class="nav-item">
                 <a class="nav-link" href="abs.php" style="color: red; font-weight: bold;" >
                 Available blood samples</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="register.php"  style=" color:red; font-weight: bold;">
-                Register</a>
+                Hospital Registeration</a>
             </li>
-            
+            <li class="nav-item">
+                <a class="nav-link" href="recieverRegister.php"  style=" color:red; font-weight: bold;">
+                 Receiver Registration</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="login.php"  style=" color:red; font-weight: bold;">
                 Login</a>

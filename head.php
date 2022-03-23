@@ -1,3 +1,4 @@
+<html>
 <head>
 	<title><?php echo $title ?></title>
 	<meta charset="UTF-8" />
@@ -11,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link href="css/st.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/st.css" >
     <link rel="shortcut icon" type="image/jpeg" href="image/favicon.jpg">
 </head>
+</html>
