@@ -22,7 +22,7 @@ if (isset($_SESSION['hid'])) {
     <?php $title = "Bloodbank | Register"; ?>
     <?php require 'head.php'; ?>
 
-    <body onload = "getLocation();">
+    <body >
         <?php include 'header.php'; ?>
         <div class="container cont">
 
@@ -51,8 +51,8 @@ if (isset($_SESSION['hid'])) {
                         <input type="tel" name="rphone" placeholder="Receiver Phone Number" class="form-control mb-3" required pattern="^\d{10}$" title="ContactNo. must have 10 digit">
                         <input type="email" name="remail" placeholder="Receiver Email" class="form-control mb-3" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                         <input type="password" name="rpassword" placeholder="Receiver Password" class="form-control mb-3" required minlength="6">
-                        <input type="hidden" name="latitude"  value="">
-                        <input type="hidden" name="longitude" value="">
+                        <!-- <input type="hidden" name="latitude"  value="">
+                        <input type="hidden" name="longitude" value=""> -->
 
                         <input type="submit" name="rregister" value="Register" class="btn btn-primary btn-block mb-4" style="margin-top: 20px;">
                         <div class="text-center"><a href="login.php" title="Click here">Already have account?</a></div>
@@ -64,7 +64,7 @@ if (isset($_SESSION['hid'])) {
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition,showError);
@@ -87,7 +87,7 @@ if (isset($_SESSION['hid'])) {
         }
 
     }
-</script>
+</script> -->
      
         <hr style="margin-bottom: 0;">
         <?php require 'footer.php' ?>

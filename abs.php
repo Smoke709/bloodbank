@@ -3,13 +3,40 @@ session_start();
 require 'file/connection.php';
 if (isset($_GET['search'])) {
     $searchKey = $_GET['search'];
+    $latitude= $_GET['latitude'];
+    $longitude= $_GET['longitude'];
+    //echo ("latitude:$latitude, Longitude:$longitude");
 
-    // $bg = $_GET['bg'];
-    // $sql = "select *from bloodinfo where bg='$bg'";
-    $sql = "select bloodinfo.*, hospitals.* from bloodinfo, hospitals where bloodinfo.hid=hospitals.id && bg LIKE '$searchKey%'";
+    
+    //$sql = "select bloodinfo.*, hospitals.* from bloodinfo, hospitals where bloodinfo.hid=hospitals.id && bg LIKE '$searchKey%'";
+
+    
+    // $sql = "SELECT id, hname, hcity, ( 3959 * acos( cos( radians($latitude) ) * cos( radians( hlatitude ) ) 
+    // * cos( radians( hlongitude ) - radians($longitude) ) + sin( radians($latitude) ) * sin(radians(hlatitude)) ) ) AS distance 
+    // FROM hospitals 
+    // HAVING distance < 25 
+    // ORDER BY distance ;";
+   //$sql = "select bloodinfo.*, hospitals.* from bloodinfo, hospitals where bloodinfo.hid=hospitals.id && bg LIKE '$searchKey%'";
+   $sql="select bloodinfo.*, hospitals.*, 3959 * 2 * ASIN(SQRT(POWER(SIN(($latitude - abs(hlatitude)) * pi()/180 / 2), 2)
+   + COS($latitude * pi()/180 ) * COS(abs(hlatitude) * pi()/180)
+   * POWER(SIN(($longitude - hlongitude) * pi()/180 / 2), 2) ))  AS distance
+    from hospitals LEFT JOIN bloodinfo ON bloodinfo.hid = hospitals.id WHERE bg = '$searchKey' ORDER BY distance
+    ";
+
+
 } else {
     $sql = "select bloodinfo.*, hospitals.* from bloodinfo, hospitals where bloodinfo.hid=hospitals.id";
 }
+// if (mysqli_multi_query($conn,$sql) ){
+//     do{
+//         if($result = MYSQLI_STORE_RESULT($conn)){
+//             while($row = mysqli_fetch_row($result){
+//                 printf("%s\n", $row[0]);
+//             })
+//         }
+//     }
+
+// }
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -18,14 +45,14 @@ $result = mysqli_query($conn, $sql);
 <?php $title = "Bloodbank | Available Blood Samples"; ?>
 <?php require 'head.php'; ?>
 
-<body>
+<body onload = "getLocation();">
     <?php require 'header.php'; ?>
     <div class="container cont">
 
         <?php require 'message.php'; ?>
 
         <div class="row col-lg-8 col-md-8 col-sm-12 mb-3">
-            <form method="get" action="" style="margin-top:-20px; ">
+            <form  class="myForm" method="get" action="" style="margin-top:-20px; ">
                 <label class="font-weight-bolder">Select Blood Group:</label>
                 <select name="search" class="form-control">
                     <option><?php echo @$_GET['search']; ?></option>
@@ -38,6 +65,8 @@ $result = mysqli_query($conn, $sql);
                     <option value="O+">O+</option>
                     <option value="O-">O-</option>
                 </select><br>
+                <input type="hidden" name="latitude"  value="">
+                <input type="hidden" name="longitude" value="">
                 <a href="abs.php" class="btn btn-info mr-4">Reset</a>
                 <input type="submit" name="submit" class="btn btn-info" value="search">
             </form>
@@ -54,7 +83,6 @@ $result = mysqli_query($conn, $sql);
                 <th>Hospital Email</th>
                 <th>Hospital Phone</th>
                 <th>Blood Group</th>
-                <th>Location</th>
                 <th>Action</th>
 
             </tr>
@@ -80,7 +108,7 @@ $result = mysqli_query($conn, $sql);
                     <td><?php echo ($row['hemail']); ?></td>
                     <td><?php echo ($row['hphone']); ?></td>
                     <td><?php echo ($row['bg']); ?></td>
-                    <td><?php echo ($row['hlatitude']); ?></td>
+                    
 
 
                     <?php $bid = $row['bid']; ?>
@@ -108,6 +136,28 @@ $result = mysqli_query($conn, $sql);
 </body>
 
 <script type="text/javascript">
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+
+        }
+    }
+
+    function showPosition(position){
+        document.querySelector('.myForm input[name = "latitude"]').value = position.coords.latitude;
+        document.querySelector('.myForm input[name = "longitude"]').value = position.coords.longitude;
+
+    }
+
+    function showError(error){
+        switch(error.code){
+            case error.PERMISSION_DENIED:
+            alert("You must allow the request for Geolocation To fill out the form");
+            location.reload();
+            break;
+        }
+
+    }
     $('.hospital').on('click', function() {
         alert("Hospital user can't request for blood.");
     });
